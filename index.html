@@ -1,0 +1,153 @@
+<!DOCTyPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Public Key Directory - Key Transparency for the Fediverse</title>
+    <link rel="stylesheet" href="/style.css" type="text/css" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="container">
+            <a href="/" class="site-title">Public Key Directory</a>
+            <ul class="nav-links">
+                <li><a href="https://github.com/fedi-e2ee/public-key-directory-specification">Specification</a></li>
+                <li><a href="https://github.com/fedi-e2ee/pkd-client-php">Client (PHP)</a></li>
+                <li><a href="https://github.com/fedi-e2ee/pkd-server-php">Server (PHP)</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <!-- BEGIN MAIN CONTENT HERE -->
+
+        <section class="hero">
+            <h1>Public Key Directory</h1>
+            <p class="lead">
+                <img class="top-image" src="/top.png" alt="On the left side of the image, a purple and green protogen furry with a black
+                    face and green lights sits cross-legged while typing on a wireless keyboard. On the right side of
+                    the image, a blue dhole furry in a black sterotypical hacker hoodie smirks menacingly while typing
+                    on a laptop with RGB keys and a skull and crossbones sticker. Between the two is the ActivityPub
+                    logo, filled with static, signifying that some of their messages are encrypted over ActivityPub." />
+            </p>
+            <p class="lead">
+                Key Transparency (in support of
+                <a href="https://swicg.github.io/activitypub-e2ee/mls" target="_blank">end-to-end encryption</a>)
+                on
+                <a href="https://ghostarchive.org/archive/fLtto" target="_blank">the Fediverse</a>.
+            </p>
+        </section>
+
+        <section class="intro">
+            <h2>What is this?</h2>
+            <p>
+                Any attempt to build End-to-End Encryption for the Fediverse will confront a difficult engineering
+                challenge: <strong>How do your users know which Public Key belongs to someone they want to communicate
+                with?</strong>
+            </p>
+            <p>
+                Historically, there have been many attempts to solve this problem:
+            </p>
+            <ul>
+                <li><strong>SSH</strong>, by default, asks the user to manually verify a key fingerprint and then trusts
+                    only that key fingerprint unless manually changed by the user.</li>
+                <li><strong>TLS</strong>, which protects most web traffic, requires <em>Certificate Authorities</em> that are
+                    trusted by your browser or Operating System.</li>
+                <li><strong>PGP</strong> encouraged a "Web of Trust" system that was complicated and brittle.</li>
+            </ul>
+            <p>
+                Any system that attempts to solve this problem at scale is called a <em>Public Key Infrastructure</em>.
+            </p>
+            <p>
+                Neither of the above approaches are a good fit for the Fediverse. However, there is a reasonable
+                precedent: To keep the Certificate Authorities honest, cryptographers and engineers invented
+                <strong>Certificate Transparency</strong>, built on an append-only data structure called a Merkle Tree.
+            </p>
+            <p>
+                The <strong>Public Key Directory</strong> adopts ideas from Certificate Transparency in order to have
+                a <strong>Federated Public Key Infrastructure without Authorities</strong>.
+            </p>
+        </section>
+
+        <section class="features">
+            <h2>Key Features</h2>
+            <ul class="feature-list">
+                <li>
+                    <h3>📜 Append-Only Transparency Log</h3>
+                    <p>All key events are recorded in an append-only ledger built with a Merkle Tree, ensuring an honest
+                        view of history.</p>
+                </li>
+                <li>
+                    <h3>🔍 Verifiable Auditing</h3>
+                    <p>Anyone can verify the consistency and integrity of the key directory.</p>
+                </li>
+                <li>
+                    <h3>✂️ Shreddable History</h3>
+                    <p>
+                        GDPR takedown requests are possible through granular key erasure.
+                    </p>
+                </li>
+                <li>
+                    <h3>🌐 Distributed Trust</h3>
+                    <p>Witness co-signing and verifiable replication.</p>
+                </li>
+                <li>
+                    <h3>➕ Auxiliary Data (Advanced)</h3>
+                    <p>Developers can build atop the PKD to add key transparency to other systems.</p>
+                </li>
+                <li>
+                    <h3>❌ In-Band Revocation</h3>
+                    <p>Attackers cannot selectively censor revocation; it's all-or-nothing.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="links">
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://github.com/fedi-e2ee/public-key-directory-specification">
+                    <strong>Read the Specification</strong>
+                </a></li>
+                <li><a target="_blank" href="https://github.com/swicg/activitypub-e2ee/issues/35">
+                    Key Transparency &mdash; activitypub-e2ee issue tracker
+                </a></li>
+                <li><a target="_blank" href="https://github.com/mastodon/fediverse_auxiliary_service_provider_specifications/discussions/59">
+                    Fediverse Auxiliary Service Provider Discussion
+                </a></li>
+            </ul>
+        </section>
+
+        <section class="status">
+            <h2>Project Status</h2>
+            <ul>
+                <li>
+                    <strong>Specification</strong>: <u>v0.3.0</u>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar" style="width:67%;background-color:#090;"></div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Server-side reference implementation</strong>: <u>v0.2.0</u>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar" style="width:35%;background-color:#670;"></div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Client-side reference library</strong>: <u>v0.1.0</u>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar" style="width:15%;background-color:#830;"></div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- END MAIN CONTENT HERE -->
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <p>
+                Source code is published under the ISC License.
+                Specifications are pubished under CC0 / Public Domain.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
